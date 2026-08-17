@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Ejecutivo - Influencer Performance</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+    <style>
+      body {
+        font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: "Sora", "IBM Plex Sans", sans-serif;
+        letter-spacing: -0.015em;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body class="min-h-screen bg-gradient-to-br from-slate-100 via-blue-50 to-slate-100 text-slate-900">
+    <header class="sticky top-0 z-30 border-b border-slate-200 bg-white/95 backdrop-blur">
+      <div class="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-[0.2em] text-blue-700">Control de crecimiento</p>
+          <h1 class="text-2xl font-black tracking-tight sm:text-3xl">Dashboard Ejecutivo de Ingresos</h1>
+        </div>
+        <nav aria-label="Navegacion por bloques" class="hidden md:block">
+          <ul class="flex items-center gap-2 text-sm font-semibold">
+            <li><a class="rounded-full bg-slate-100 px-3 py-1.5 text-slate-700 hover:bg-blue-100" href="#bloque-kpi">KPIs</a></li>
+            <li><a class="rounded-full bg-slate-100 px-3 py-1.5 text-slate-700 hover:bg-blue-100" href="#bloque-drivers">Drivers</a></li>
+            <li><a class="rounded-full bg-slate-100 px-3 py-1.5 text-slate-700 hover:bg-blue-100" href="#bloque-operacional">Operacional</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 lg:px-8" id="dashboardRoot">
+      <div class="grid grid-cols-1 gap-4 lg:grid-cols-[40px_272px_1fr]" id="layoutGrid">
+        <div class="order-1 flex items-start justify-start lg:sticky lg:top-24">
+          <button
+            id="sidebarToggleIcon"
+            type="button"
+            class="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-300 bg-white text-slate-600 shadow-sm transition hover:border-blue-400 hover:text-blue-700"
+            aria-expanded="true"
+            aria-controls="sidebarPanel"
+            aria-label="Ocultar sidebar"
+          >
+            <span class="relative block h-4 w-5" aria-hidden="true">
+              <span id="burgerLineTop" class="absolute left-0 top-0 h-0.5 w-5 rounded bg-current transition-all duration-200"></span>
+              <span id="burgerLineMid" class="absolute left-0 top-1.5 h-0.5 w-5 rounded bg-current transition-all duration-200"></span>
+              <span id="burgerLineBottom" class="absolute left-0 top-3 h-0.5 w-5 rounded bg-current transition-all duration-200"></span>
+            </span>
+            <span class="sr-only">Alternar sidebar</span>
+          </button>
+        </div>
+
+        <aside id="sidebarPanel" class="order-2 space-y-3 overflow-y-auto rounded-2xl lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)]">
+          <article class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+            <h2 class="text-sm font-bold uppercase tracking-[0.15em] text-slate-500">Filtros</h2>
+            <form class="mt-3 grid grid-cols-1 gap-3" aria-label="Filtros principales">
+              <label class="flex flex-col gap-1 text-sm font-medium text-slate-700" for="periodFilter">
+                Periodo
+                <select id="periodFilter" class="rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 focus:border-blue-500 focus:outline-none">
+                  <option value="mes_actual">Mes actual</option>
+                </select>
+              </label>
+              <label class="flex flex-col gap-1 text-sm font-medium text-slate-700" for="platformFilter">
+                Plataforma
+                <select id="platformFilter" class="rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 focus:border-blue-500 focus:outline-none">
+                  <option value="all">Todas</option>
+                </select>
+              </label>
+              <label class="flex flex-col gap-1 text-sm font-medium text-slate-700" for="productFilter">
+                Producto
+                <select id="productFilter" class="rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 focus:border-blue-500 focus:outline-none">
+                  <option value="all">Todos</option>
+                </select>
+              </label>
+            </form>
+          </article>
+
+          <article class="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 shadow-sm">
+            <h2 class="text-sm font-bold uppercase tracking-[0.15em] text-emerald-700">Proyeccion siguiente mes</h2>
+            <p class="mt-2 text-2xl font-black tabular-nums text-emerald-900" id="forecastRevenue">-</p>
+            <p class="mt-1 text-xs text-emerald-700" id="forecastDelta">-</p>
+            <ul class="mt-3 space-y-2" id="forecastSuggestions"></ul>
+          </article>
+
+          <article class="rounded-2xl border border-blue-200 bg-blue-50 p-4 shadow-sm">
+            <h2 class="text-sm font-bold uppercase tracking-[0.15em] text-blue-700">Top y oportunidades</h2>
+            <ul id="topList" class="mt-3 space-y-2"></ul>
+          </article>
+        </aside>
+
+        <div class="order-3 space-y-6" id="contentPanel">
+          <section aria-labelledby="kpi-title" class="space-y-3 scroll-mt-28" id="bloque-kpi">
+            <div class="flex items-end justify-between">
+              <h2 id="kpi-title" class="text-lg font-extrabold sm:text-xl">Bloque 1: KPI Principales</h2>
+              <p class="text-xs font-semibold uppercase tracking-[0.1em] text-blue-700">Resultado de negocio</p>
+            </div>
+            <div id="kpiGrid" class="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4"></div>
+            <article class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+              <h3 class="text-sm font-semibold uppercase tracking-[0.12em] text-slate-500">Tendencia de revenue (12 meses)</h3>
+              <div class="mt-4 rounded-xl border border-slate-200 bg-slate-50 p-3">
+                <svg id="revenueTrendLine" viewBox="0 0 100 36" class="h-44 w-full" preserveAspectRatio="none"></svg>
+                <ul id="revenueTrendLabels" class="mt-3 grid grid-cols-2 gap-2 text-[11px] text-slate-600 sm:grid-cols-4"></ul>
+              </div>
+            </article>
+          </section>
+
+          <section aria-labelledby="drivers-title" class="space-y-3 scroll-mt-28" id="bloque-drivers">
+            <div class="flex items-end justify-between">
+              <h2 id="drivers-title" class="text-lg font-extrabold sm:text-xl">Bloque 2: Drivers</h2>
+              <p class="text-xs font-semibold uppercase tracking-[0.1em] text-blue-700">Factores explicativos</p>
+            </div>
+            <div class="grid grid-cols-1 gap-4 xl:grid-cols-3">
+              <article class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm xl:col-span-1">
+                <h3 class="text-sm font-semibold uppercase tracking-[0.12em] text-slate-500">Funnel de conversion</h3>
+                <ul class="mt-3 space-y-3" id="funnelList"></ul>
+              </article>
+              <article class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm xl:col-span-2">
+                <h3 class="text-sm font-semibold uppercase tracking-[0.12em] text-slate-500">Rendimiento por plataforma y producto</h3>
+                <div class="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2" id="driverCards"></div>
+              </article>
+            </div>
+            <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+              <article class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+                <h3 class="text-sm font-semibold uppercase tracking-[0.12em] text-slate-500">Calidad y actividad</h3>
+                <div class="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2" id="qualityActivityCards"></div>
+              </article>
+              <article class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+                <h3 class="text-sm font-semibold uppercase tracking-[0.12em] text-slate-500">Engagement por plataforma</h3>
+                <ul class="mt-3 space-y-3" id="engagementBars"></ul>
+              </article>
+            </div>
+          </section>
+
+          <section aria-labelledby="ops-title" class="space-y-3 scroll-mt-28 pb-8" id="bloque-operacional">
+            <div class="flex items-end justify-between">
+              <h2 id="ops-title" class="text-lg font-extrabold sm:text-xl">Bloque 3: Operacional</h2>
+              <p class="text-xs font-semibold uppercase tracking-[0.1em] text-blue-700">Tablas y alertas</p>
+            </div>
+
+            <article class="rounded-2xl border border-amber-200 bg-amber-50 p-4 shadow-sm">
+              <h3 class="text-sm font-semibold uppercase tracking-[0.12em] text-amber-700">Alertas de rendimiento</h3>
+              <ul id="alertsList" class="mt-3 space-y-2"></ul>
+            </article>
+
+            <article class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+              <h3 class="text-sm font-semibold uppercase tracking-[0.12em] text-slate-500">Tabla de productos</h3>
+              <div class="mt-3 overflow-x-auto" id="productsTable"></div>
+            </article>
+
+            <article class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+              <h3 class="text-sm font-semibold uppercase tracking-[0.12em] text-slate-500">Tabla de plataformas</h3>
+              <div class="mt-3 overflow-x-auto" id="platformsTable"></div>
+            </article>
+
+            <article class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+              <h3 class="text-sm font-semibold uppercase tracking-[0.12em] text-slate-500">Tabla de campanas</h3>
+              <div class="mt-3 overflow-x-auto" id="campaignsTable"></div>
+            </article>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <script type="module" src="./src/js/main.js"></script>
+  </body>
+</html>

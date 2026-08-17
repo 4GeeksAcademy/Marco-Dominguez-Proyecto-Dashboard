@@ -1,0 +1,232 @@
+{
+  "products": [
+    { "id": "A", "name": "Producto A", "price": 50 },
+    { "id": "B", "name": "Producto B", "price": 120 },
+    { "id": "C", "name": "Producto C", "price": 80 }
+  ],
+  "platforms": [
+    {
+      "id": "instagram",
+      "name": "Instagram",
+      "color": "bg-rose-500"
+    },
+    {
+      "id": "tiktok",
+      "name": "TikTok",
+      "color": "bg-sky-500"
+    },
+    {
+      "id": "youtube",
+      "name": "YouTube",
+      "color": "bg-red-600"
+    }
+  ],
+  "periods": {
+    "mes_actual": {
+      "usersActive": 14200,
+      "signups": 910,
+      "subscriptions": {
+        "mrr": 12600,
+        "churnRate": 0.06,
+        "permanenciaRate": 0.82,
+        "completionRate": 0.64
+      },
+      "satisfaction": {
+        "nps": 56,
+        "csat": 87
+      },
+      "quality": {
+        "qualifiedLeadRate": 0.42,
+        "attendanceRate": 0.78,
+        "passRate": 0.69
+      },
+      "platformMetrics": {
+        "instagram": {
+          "reach": 49000,
+          "impressions": 69000,
+          "clicks": 5600,
+          "interactions": 4800,
+          "cost": 2050,
+          "posts": 14,
+          "stories": 28,
+          "reels": 12,
+          "videos": 0,
+          "productSales": { "A": 140, "B": 52, "C": 70 }
+        },
+        "tiktok": {
+          "reach": 61000,
+          "impressions": 86000,
+          "clicks": 5900,
+          "interactions": 5500,
+          "cost": 2380,
+          "posts": 12,
+          "stories": 0,
+          "reels": 0,
+          "videos": 19,
+          "productSales": { "A": 120, "B": 68, "C": 85 }
+        },
+        "youtube": {
+          "reach": 45000,
+          "impressions": 70000,
+          "clicks": 4700,
+          "interactions": 4300,
+          "cost": 1980,
+          "posts": 7,
+          "stories": 0,
+          "reels": 0,
+          "videos": 11,
+          "productSales": { "A": 85, "B": 76, "C": 64 }
+        }
+      },
+      "campaigns": [
+        {
+          "name": "Lanzamiento A Agosto",
+          "platform": "instagram",
+          "product": "A",
+          "startDate": "2026-08-01",
+          "endDate": "2026-08-08",
+          "reach": 15000,
+          "conversions": 58,
+          "revenue": 2900,
+          "cost": 620
+        },
+        {
+          "name": "Combo B-C Creator Week",
+          "platform": "tiktok",
+          "product": "B",
+          "startDate": "2026-08-05",
+          "endDate": "2026-08-14",
+          "reach": 22000,
+          "conversions": 64,
+          "revenue": 7680,
+          "cost": 980
+        },
+        {
+          "name": "Review Profunda C",
+          "platform": "youtube",
+          "product": "C",
+          "startDate": "2026-08-10",
+          "endDate": "2026-08-16",
+          "reach": 18000,
+          "conversions": 41,
+          "revenue": 3280,
+          "cost": 710
+        },
+        {
+          "name": "Retarget Multi Producto",
+          "platform": "instagram",
+          "product": "B",
+          "startDate": "2026-08-12",
+          "endDate": "2026-08-20",
+          "reach": 17000,
+          "conversions": 39,
+          "revenue": 4680,
+          "cost": 790
+        }
+      ]
+    },
+    "mes_anterior": {
+      "usersActive": 13100,
+      "signups": 840,
+      "subscriptions": {
+        "mrr": 11800,
+        "churnRate": 0.07,
+        "permanenciaRate": 0.79,
+        "completionRate": 0.61
+      },
+      "satisfaction": {
+        "nps": 52,
+        "csat": 84
+      },
+      "quality": {
+        "qualifiedLeadRate": 0.39,
+        "attendanceRate": 0.75,
+        "passRate": 0.66
+      },
+      "platformMetrics": {
+        "instagram": {
+          "reach": 47000,
+          "impressions": 65000,
+          "clicks": 5050,
+          "interactions": 4450,
+          "cost": 1980,
+          "posts": 13,
+          "stories": 24,
+          "reels": 10,
+          "videos": 0,
+          "productSales": { "A": 122, "B": 46, "C": 63 }
+        },
+        "tiktok": {
+          "reach": 57500,
+          "impressions": 80500,
+          "clicks": 5480,
+          "interactions": 5010,
+          "cost": 2310,
+          "posts": 11,
+          "stories": 0,
+          "reels": 0,
+          "videos": 18,
+          "productSales": { "A": 108, "B": 61, "C": 74 }
+        },
+        "youtube": {
+          "reach": 43000,
+          "impressions": 66000,
+          "clicks": 4390,
+          "interactions": 3920,
+          "cost": 1910,
+          "posts": 7,
+          "stories": 0,
+          "reels": 0,
+          "videos": 10,
+          "productSales": { "A": 79, "B": 69, "C": 58 }
+        }
+      },
+      "campaigns": [
+        {
+          "name": "Lanzamiento A Julio",
+          "platform": "instagram",
+          "product": "A",
+          "startDate": "2026-07-01",
+          "endDate": "2026-07-07",
+          "reach": 13900,
+          "conversions": 51,
+          "revenue": 2550,
+          "cost": 590
+        },
+        {
+          "name": "B Growth Sprint",
+          "platform": "tiktok",
+          "product": "B",
+          "startDate": "2026-07-06",
+          "endDate": "2026-07-15",
+          "reach": 20400,
+          "conversions": 58,
+          "revenue": 6960,
+          "cost": 940
+        },
+        {
+          "name": "Comparativa C",
+          "platform": "youtube",
+          "product": "C",
+          "startDate": "2026-07-10",
+          "endDate": "2026-07-16",
+          "reach": 16600,
+          "conversions": 35,
+          "revenue": 2800,
+          "cost": 690
+        },
+        {
+          "name": "Remarketing mixto",
+          "platform": "instagram",
+          "product": "B",
+          "startDate": "2026-07-12",
+          "endDate": "2026-07-20",
+          "reach": 15900,
+          "conversions": 34,
+          "revenue": 4080,
+          "cost": 760
+        }
+      ]
+    }
+  }
+}
